@@ -122,7 +122,7 @@ public class AddressBookDBService {
     public List<AddressBookData> getCount(String city) {
         List<AddressBookData> addressBookDataList = new ArrayList<>();
         String sql = String.format("SELECT * FROM Address_Book where city = '%s';", city);
-        try (Connection connection = this.getConnection()){
+        try (Connection connection = this.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             addressBookDataList = this.getEmployeePayrollData(resultSet);
@@ -135,7 +135,7 @@ public class AddressBookDBService {
     public List<AddressBookData> getCountByState(String state) {
         List<AddressBookData> addressBookDataList = new ArrayList<>();
         String sql = String.format("SELECT * FROM Address_Book where state = '%s';", state);
-        try (Connection connection = this.getConnection()){
+        try (Connection connection = this.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             addressBookDataList = this.getEmployeePayrollData(resultSet);
@@ -143,5 +143,24 @@ public class AddressBookDBService {
             e.printStackTrace();
         }
         return addressBookDataList;
+    }
+
+    public AddressBookData addContact(String firstName, String lastName, String address, String city, String state, int zip, String phoneNumber, String email) {
+        int contactId = -1;
+        AddressBookData addressBookData = null;
+        String sql = String.format("INSERT INTO Address_Book (firstName, lastName, address, city, state, zip, phoneNumber, email)" +
+                "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", firstName, lastName, address, city, state, zip, Long.valueOf(phoneNumber), email);
+        try (Connection connection = this.getConnection()) {
+            Statement statement = connection.createStatement();
+            int rowAffected = statement.executeUpdate(sql, statement.RETURN_GENERATED_KEYS);
+            if (rowAffected == 1) {
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if (resultSet.next()) contactId = resultSet.getInt(1);
+            }
+            addressBookData = new AddressBookData(contactId, firstName, lastName, address, city, state, zip, Long.valueOf(phoneNumber), email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return addressBookData;
     }
 }
