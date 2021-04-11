@@ -30,14 +30,23 @@ public class AddressBookTest {
     @Test
     public void givenContactDataInDB_whenCountByCity_ShouldMatchWithExpectedValue() {
         addressBook = new AddressBook();
-        List<AddressBookData>  addressBookDataList = addressBook.countByCity("Cambridge");
+        List<AddressBookData> addressBookDataList = addressBook.countByCity("Cambridge");
         Assertions.assertEquals(3, addressBookDataList.size());
     }
 
     @Test
     public void givenContactDataInDB_whenCountByState_ShouldMatchWithExpectedValue() {
         addressBook = new AddressBook();
-        List<AddressBookData>  addressBookDataList = addressBook.countByState("TX");
+        List<AddressBookData> addressBookDataList = addressBook.countByState("TX");
         Assertions.assertEquals(2, addressBookDataList.size());
+    }
+
+    @Test
+    public void givenNewContactData_WhenAdded_ShouldSyncWithDB() {
+        addressBook = new AddressBook();
+        addressBookDataList = addressBook.readAddressBookData(AddressBook.IOService.DB_IO);
+        addressBook.addContactToAddressBook("Samiksha", "Shende", "Ram Nagar", "Wardha", "MH", 442001, "6866577899", "shende.samiksha@gmail.com");
+        boolean result = addressBook.checkAddressBookInSyncWithDB("Samiksha");
+        Assertions.assertTrue(result);
     }
 }
