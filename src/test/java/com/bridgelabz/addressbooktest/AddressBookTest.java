@@ -26,4 +26,18 @@ public class AddressBookTest {
         boolean result = addressBook.checkAddressBookInSyncWithDB("Jesse");
         Assertions.assertTrue(result);
     }
+
+    @Test
+    public void givenContactDataInDB_whenCountByCity_ShouldMatchWithExpectedValue() {
+        addressBook = new AddressBook();
+        List<AddressBookData>  addressBookDataList = addressBook.countByCity("Cambridge");
+        Assertions.assertEquals(3, addressBookDataList.size());
+    }
+
+    @Test
+    public void givenContactDataInDB_whenCountByState_ShouldMatchWithExpectedValue() {
+        addressBook = new AddressBook();
+        List<AddressBookData>  addressBookDataList = addressBook.countByState("TX");
+        Assertions.assertEquals(2, addressBookDataList.size());
+    }
 }
