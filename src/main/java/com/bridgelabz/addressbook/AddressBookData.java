@@ -3,17 +3,18 @@ package com.bridgelabz.addressbook;
 import java.util.Objects;
 
 public class AddressBookData {
+    public int id;
+    public String firstName;
+    public String lastName;
+    public String address;
+    public String city;
+    public String state;
+    public int zip;
+    public long phone;
+    public String email;
 
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private int zip;
-    private long phone;
-    private String email;
-
-    public AddressBookData(String firstName, String lastName, String address, String city, String state, int zip, long phone, String email) {
+    public AddressBookData(int id, String firstName, String lastName, String address, String city, String state, int zip, long phone, String email) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -27,6 +28,7 @@ public class AddressBookData {
     @Override
     public String toString() {
         return "AddressBookData{" +
+                "id='" + id + '\'' +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
@@ -43,6 +45,7 @@ public class AddressBookData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AddressBookData that = (AddressBookData) o;
-        return zip == that.zip && phone == that.phone && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(email, that.email);
+        return id == that.id && zip == that.zip && phone == that.phone && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(email, that.email);
     }
+
 }

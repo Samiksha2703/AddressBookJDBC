@@ -25,4 +25,17 @@ public class AddressBook {
             return this.addressBookList = addressBookDBService.getAddressBookDataUsingDB();
         return null;
     }
+
+    public void updateContact(String address, String name) {
+        int result = addressBookDBService.updateContactDetails(name, address);
+    }
+
+    public boolean checkAddressBookInSyncWithDB(String name) {
+        List<AddressBookData> addressBookDataList = addressBookDBService.getEmployeePayrollData(name);
+        return addressBookDataList.get(0).equals(getEmployeePayrollData(name));
+    }
+
+    private AddressBookData getEmployeePayrollData(String name) {
+        return this.addressBookList.stream().filter(employeePayrollDataItem -> employeePayrollDataItem.firstName.equals(name)).findFirst().orElse(null);
+    }
 }
