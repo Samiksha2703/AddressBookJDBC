@@ -118,4 +118,30 @@ public class AddressBookDBService {
         }
         return addressBookList;
     }
+
+    public List<AddressBookData> getCount(String city) {
+        List<AddressBookData> addressBookDataList = new ArrayList<>();
+        String sql = String.format("SELECT * FROM Address_Book where city = '%s';", city);
+        try (Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            addressBookDataList = this.getEmployeePayrollData(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return addressBookDataList;
+    }
+
+    public List<AddressBookData> getCountByState(String state) {
+        List<AddressBookData> addressBookDataList = new ArrayList<>();
+        String sql = String.format("SELECT * FROM Address_Book where state = '%s';", state);
+        try (Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            addressBookDataList = this.getEmployeePayrollData(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return addressBookDataList;
+    }
 }

@@ -38,4 +38,13 @@ public class AddressBook {
     private AddressBookData getEmployeePayrollData(String name) {
         return this.addressBookList.stream().filter(employeePayrollDataItem -> employeePayrollDataItem.firstName.equals(name)).findFirst().orElse(null);
     }
+
+    public List<AddressBookData> countByCity(String city) {
+        return addressBookDBService.getCount(city);
+    }
+
+    public List<AddressBookData> countByState(String state) {
+        return addressBookDBService.getCountByState(state);
+    }
+
 }
