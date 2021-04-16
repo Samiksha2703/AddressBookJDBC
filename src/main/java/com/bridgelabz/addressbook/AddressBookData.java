@@ -27,7 +27,7 @@ public class AddressBookData {
 
     @Override
     public String toString() {
-        return "AddressBookData{" +
+        return "{" +
                 "id='" + id + '\'' +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
