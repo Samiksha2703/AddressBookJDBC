@@ -1,0 +1,37 @@
+{
+   "contacts":[
+     {
+       "id": 1,
+       "firstName": "Samiksha",
+       "lastName": "Shende",
+       "address": "Ram Nagar",
+       "city": "Wardha",
+       "state": "MH",
+       "zip": 698745,
+       "phone": 7387549683,
+       "email": "shende.samiksha@gmail.com"
+     },
+     {
+       "id": 1,
+       "firstName": "Apurva",
+       "lastName": "Ekhar",
+       "address": "Gajanan Nagar",
+       "city": "Seloo",
+       "state": "MH",
+       "zip": 656945,
+       "phone": 7683854973,
+       "email": "apurva95@gmail.com"
+     },
+     {
+       "id": 1,
+       "firstName": "Neha",
+       "lastName": "Zade",
+       "address": "Ramadaspeth",
+       "city": "Nagpur",
+       "state": "MH",
+       "zip": 986745,
+       "phone": 8796837354,
+       "email": "zade.neha1@gmail.com"
+     }
+  ]
+}
