@@ -10,10 +10,10 @@ public class AddressBookData {
     public String city;
     public String state;
     public int zip;
-    public long phone;
+    public String phone;
     public String email;
 
-    public AddressBookData(int id, String firstName, String lastName, String address, String city, String state, int zip, long phone, String email) {
+    public AddressBookData(int id, String firstName, String lastName, String address, String city, String state, int zip, String phone, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

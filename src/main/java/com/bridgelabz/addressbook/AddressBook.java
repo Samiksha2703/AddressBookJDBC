@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class AddressBook {
 
     public AddressBook(List<AddressBookData> addressBookList) {
         this();
-        this.addressBookList = addressBookList;
+        this.addressBookList = new ArrayList<>(addressBookList);
     }
 
     public List<AddressBookData> readAddressBookData(IOService ioService) {
@@ -89,7 +90,14 @@ public class AddressBook {
 
     public long countEntries(IOService ioService) {
         if (ioService.equals(IOService.DB_IO) || ioService.equals(IOService.REST_IO))
-        return this.addressBookList.size();
+            return this.addressBookList.size();
         return 0;
+    }
+
+
+    public void addContact(AddressBookData addressBookData, IOService ioService) {
+        if (ioService.equals(IOService.DB_IO))
+            this.addContactToAddressBook(addressBookData.firstName, addressBookData.lastName, addressBookData.address, addressBookData.city, addressBookData.state, addressBookData.zip, addressBookData.phone, addressBookData.email);
+        else addressBookList.add(addressBookData);
     }
 }

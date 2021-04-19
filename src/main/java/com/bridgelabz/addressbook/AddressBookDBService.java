@@ -111,7 +111,7 @@ public class AddressBookDBService {
                 int zip = resultSet.getInt("zip");
                 long phone = resultSet.getLong("phoneNumber");
                 String email = resultSet.getString("email");
-                addressBookList.add(new AddressBookData(id, firstName, lastName, address, city, state, zip, phone, email));
+                addressBookList.add(new AddressBookData(id, firstName, lastName, address, city, state, zip, String.valueOf(phone), email));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,7 +157,7 @@ public class AddressBookDBService {
                 ResultSet resultSet = statement.getGeneratedKeys();
                 if (resultSet.next()) contactId = resultSet.getInt(1);
             }
-            addressBookData = new AddressBookData(contactId, firstName, lastName, address, city, state, zip, Long.valueOf(phoneNumber), email);
+            addressBookData = new AddressBookData(contactId, firstName, lastName, address, city, state, zip, phoneNumber, email);
         } catch (SQLException e) {
             e.printStackTrace();
         }
