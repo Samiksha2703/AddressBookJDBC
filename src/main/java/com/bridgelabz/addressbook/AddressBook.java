@@ -39,10 +39,10 @@ public class AddressBook {
 
     public boolean checkAddressBookInSyncWithDB(String name) {
         List<AddressBookData> addressBookDataList = addressBookDBService.getEmployeePayrollData(name);
-        return addressBookDataList.get(0).equals(getEmployeePayrollData(name));
+        return addressBookDataList.get(0).equals(getAddressBookData(name));
     }
 
-    private AddressBookData getEmployeePayrollData(String name) {
+    public AddressBookData getAddressBookData(String name) {
         return this.addressBookList.stream().filter(employeePayrollDataItem -> employeePayrollDataItem.firstName.equals(name)).findFirst().orElse(null);
     }
 
@@ -99,5 +99,15 @@ public class AddressBook {
         if (ioService.equals(IOService.DB_IO))
             this.addContactToAddressBook(addressBookData.firstName, addressBookData.lastName, addressBookData.address, addressBookData.city, addressBookData.state, addressBookData.zip, addressBookData.phone, addressBookData.email);
         else addressBookList.add(addressBookData);
+    }
+
+    public void updateContactAddress(String name, String address, IOService ioService) {
+        if (ioService.equals(IOService.DB_IO)) {
+            int result = addressBookDBService.updateContactDetails(name, address);
+            if (result == 0) return;
+        }
+        AddressBookData addressBook = this.getAddressBookData(name);
+        if (addressBook != null)
+            addressBook.address = address;
     }
 }

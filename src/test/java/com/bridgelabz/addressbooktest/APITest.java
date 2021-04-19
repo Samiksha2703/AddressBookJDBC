@@ -60,4 +60,19 @@ public class APITest {
         long entries = addressBook.countEntries(AddressBook.IOService.REST_IO);
         Assertions.assertEquals(6, entries);
     }
+
+    @Test
+    public void givenNewSalaryForEmployee_WhenUpdated_ShouldMatch() {
+        AddressBookData[] arrayOfContacts = getContactList();
+        AddressBook addressBook = new AddressBook(Arrays.asList(arrayOfContacts));
+        addressBook.updateContactAddress("Samiksha", "Sai Nagar", AddressBook.IOService.REST_IO);
+        AddressBookData addressBookData = addressBook.getAddressBookData("Samiksha");
+        String contJson = new Gson().toJson(addressBookData);
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        request.body(contJson);
+        Response response = request.put("/address_book/" + addressBookData.id);
+        int statusCode = response.getStatusCode();
+        Assertions.assertEquals(200, statusCode);
+    }
 }
