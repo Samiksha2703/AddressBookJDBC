@@ -88,8 +88,8 @@ public class AddressBook {
     }
 
     public long countEntries(IOService ioService) {
-        if (ioService.equals(IOService.DB_IO))
-            return this.addressBookList.size();
+        if (ioService.equals(IOService.DB_IO) || ioService.equals(IOService.REST_IO))
+        return this.addressBookList.size();
         return 0;
     }
 }
