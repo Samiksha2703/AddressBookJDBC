@@ -110,4 +110,12 @@ public class AddressBook {
         if (addressBook != null)
             addressBook.address = address;
     }
+
+
+    public void deleteContact(String name, IOService ioService) {
+        if (ioService.equals(IOService.REST_IO)) {
+            AddressBookData employeePayrollData = this.getAddressBookData(name);
+            addressBookList.remove(employeePayrollData);
+        }
+    }
 }

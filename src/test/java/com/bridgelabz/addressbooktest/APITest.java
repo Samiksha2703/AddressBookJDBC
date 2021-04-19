@@ -75,4 +75,21 @@ public class APITest {
         int statusCode = response.getStatusCode();
         Assertions.assertEquals(200, statusCode);
     }
+
+    @Test
+    public void givenEmployeeToDelete_WhenDeleted_ShouldMatch200ResponseAndCount() {
+        AddressBookData[] arrayOfEmployees = getContactList();
+        AddressBook addressBook = new AddressBook(Arrays.asList(arrayOfEmployees));
+
+        AddressBookData addressBookData = addressBook.getAddressBookData("Pratiksha");
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        Response response = request.delete("/address_book/" + addressBookData.id);
+        int statusCode = response.getStatusCode();
+        Assertions.assertEquals(200, statusCode);
+
+        addressBook.deleteContact(addressBookData.firstName, AddressBook.IOService.REST_IO);
+        long entries = addressBook.countEntries(AddressBook.IOService.REST_IO);
+        Assertions.assertEquals(5, entries);
+    }
 }
